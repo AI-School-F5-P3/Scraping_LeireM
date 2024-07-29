@@ -27,8 +27,7 @@ Para ejecutar el script, simplemente usa el siguiente comando:
 python quotescraper.py
 
 
-
-El script raspará todas las páginas disponibles en Quotes to Scrape, recopilando citas y biografías de autores.
+El script scrapeará todas las páginas disponibles en Quotes to Scrape, recopilando citas y biografías de autores.
 
 ## Archivos de Salida
 El script generará dos archivos CSV:
@@ -40,15 +39,17 @@ El script generará dos archivos CSV:
 
 ### Clase `QuoteScraper`
 
-- `__init__(self, base_url, delay=1, max_pages=None)`: Inicializa la instancia de `QuoteScraper` con la URL base, el retardo entre solicitudes y el número máximo de páginas a raspar.
+- `__init__(self, base_url, start_page=1, end_page=None)`: Inicializa la instancia de `QuoteScraper` con la URL base y el intervalo de páginas a scrapear
 
 - `get_quotes_from_page(self, url)`: Raspa todas las citas de una página dada.
 
 - `get_author_info(self, url)`: Obtiene la biografía del autor desde la página del autor.
 
-- `scrape_all_quotes(self)`: Raspa todas las páginas de citas hasta que no haya más disponibles o se alcance el máximo de páginas (si se ha especificado).
+- `self.start_page = start_page`: página de inicio
 
-- `save_to_csv(self)`: Guarda los datos de las citas y autores en archivos CSV.
+- `self.end_page = end_page`: página de fin
+
+- `logging.basicConfig`: registro de logs
 
 ### Ejemplo de Uso
 
@@ -56,17 +57,10 @@ A continuación se muestra un ejemplo básico de cómo utilizar la clase `QuoteS
 
 if __name__ == "__main__":
     base_url = "https://quotes.toscrape.com"
-    scraper = QuoteScraper(base_url, delay=1, max_pages=10)  # Raspado con un máximo de 10 páginas
+    scraper = QuoteScraper(base_url, start_page=1, end_page=9)
     scraper.scrape_all_quotes()
     scraper.save_to_csv()
 
-
-    ## Personalización
-
-Puedes personalizar el comportamiento del raspado ajustando los parámetros `delay` y `max_pages` en la instancia de `QuoteScraper`.
-
-- **delay**: Configura el tiempo de espera (en segundos) entre solicitudes para evitar sobrecargar el servidor.
-- **max_pages**: Establece el número máximo de páginas a raspar. Si se deja como `None`, se rasparán todas las páginas disponibles.
 
 ## Contribuciones
 
