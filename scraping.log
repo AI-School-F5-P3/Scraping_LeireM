@@ -1,0 +1,7 @@
+2024-07-30 00:15:02,437 - INFO - Scraped page 1
+2024-07-30 00:15:10,834 - INFO - Scraped page 2
+2024-07-30 00:15:16,875 - INFO - Scraped page 3
+2024-07-30 00:15:22,338 - INFO - Scraped page 4
+2024-07-30 00:15:26,808 - INFO - Scraped page 5
+2024-07-30 00:15:27,814 - INFO - Quotes data saved to quotes_data.csv
+2024-07-30 00:15:27,817 - INFO - Authors data saved to authors_data.csv
