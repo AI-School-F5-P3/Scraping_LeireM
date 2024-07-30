@@ -67,17 +67,36 @@ class QuoteScraper:
         except requests.RequestException as e:
             logging.error(f"Error fetching {url}: {e}")
 
-    def get_author_info(self, url):
+     def get_author_about_info(self, url):
         try:
             response = requests.get(url)
             response.raise_for_status()
-            soup = BeautifulSoup(response.text, 'html.parser')
-            author_bio = soup.find("div", class_="author-details")
-            return author_bio.get_text(strip=True) if author_bio else ""
+            soup = BeautifulSoup(response.text, 'lxml')
+            author_about = soup.find("div", class_="about")
+            return author_about.get_text(strip=True) if author_about else "No about info available"
         except requests.RequestException as e:
-            logging.error(f"Error fetching author info from {url}: {e}")
+            logging.error(f"Error fetching author about info from {url}: {e}")
             return ""
-
+        
+    def get_about_info(self):
+    try:
+        about_url = f"{self.base_url}/about"
+        response = requests.get(about_url)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.text, 'lxml')
+        
+        about_content = soup.find("div", class_="row")
+        if about_content:
+            about_text = about_content.get_text(strip=True)
+            logging.info("About information extracted successfully")
+            return about_text
+        else:
+            logging.warning("Could not find about information on the page")
+            return ""
+    except requests.RequestException as e:
+        logging.error(f"Error fetching about info from {about_url}: {e}")
+        return ""
+    
     def scrape_all_quotes(self):
         page = self.start_page
         while True:
