@@ -3,11 +3,11 @@
 
 ## Descripción
 
-`QuoteScraper` es una herramienta escrita en Python para raspar citas del sitio web [Quotes to Scrape](http://quotes.toscrape.com/). La herramienta recopila citas, autores y sus biografías, y guarda esta información en archivos CSV.
+`web_scrap` es una herramienta escrita en Python para raspar citas del sitio web [Quotes to Scrape](http://quotes.toscrape.com/). La herramienta recopila citas, autores y sus biografías, y guarda esta información en archivos CSV.
 
 ## Requisitos
 
-Antes de ejecutar `QuoteScraper`, asegúrate de tener instaladas las siguientes bibliotecas de Python:
+Antes de ejecutar `web_scrap.`, asegúrate de tener instaladas las siguientes bibliotecas de Python:
 
 - `requests`
 - `beautifulsoup4`
@@ -24,7 +24,7 @@ pip install requests beautifulsoup4 pandas
 
 Para ejecutar el script, simplemente usa el siguiente comando:
 
-python quotescraper.py
+python web_scrap.py
 
 
 El script scrapeará todas las páginas disponibles en Quotes to Scrape, recopilando citas y biografías de autores.
@@ -55,11 +55,13 @@ El script generará dos archivos CSV:
 
 A continuación se muestra un ejemplo básico de cómo utilizar la clase `QuoteScraper`:
 
+
 if __name__ == "__main__":
     base_url = "https://quotes.toscrape.com"
     scraper = QuoteScraper(base_url, start_page=1, end_page=9)
     scraper.scrape_all_quotes()
     scraper.save_to_csv()
+
 
 
 ## Contribuciones
